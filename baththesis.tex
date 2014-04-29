@@ -1,0 +1,116 @@
+\documentclass[11pt]{report}
+% packages
+\usepackage{baththesis}
+\usepackage{amssymb} %for Blackboard bold etc 
+\usepackage{graphicx} %for including eps graphics 
+% front matter
+\title{Structure-Aware Procedural Destruction} \author{Thomas AE. Smith}
+\degree{Doctor of Engineering}
+\department{The Centre for Digital Entertainment} \degreemonthyear{May 2014}
+\norestrictions
+\begin{document}
+
+\maketitle
+
+\begin{abstract} %32
+	In this proposal and literature review a number of possible approaches to developing a procedural destruction system are investigated, and an approach developed to guide practical research and development in this area.
+\end{abstract}
+
+
+% 1.1 A background to program synthesis 
+% 1 1.1.2 Problems with program synthesis 4
+% 1.2 An alternative approach through reuse 5
+% 1.2.1 Code level reuse 6
+% 1.2.2 Design level reuse 6
+% 1.2.3 Specification level reuse 7
+% 1.2.4 The object-oriented approach 7
+% 1.2.5 Abstraction for reuse 8
+% 1.3 Reuse or synthesis 9
+% 1.4 Combining reuse with artificial intelligence 9
+% 1.5 Overview of thesis 9
+\chapter{Introduction}
+	% Description of a problem. All research should be problem driven. You present a problem, what others have done to solve the problem (brief summary), your solution, why it is different and what the benefits are. A relatively brief version of this comes into the introduction. Explain your motivation, why you chose this project. At the end write a clear roadmap for the rest of the document.
+	% The exact structure of the document depends on the concrete type of project, but it must include a 3-5 page Introduction section which:
+% • Summarises the expected main argument of the dissertation,
+% • Presents a clear roadmap for the rest of the document, and
+	Paragraph on video games introducing contect and the drive for increased fidelity, enabled by ever-improving hardware. Also mention variety.
+
+	Providing high-fidelity destruction requires investment. Some approaches to rendering damage applied to in-game assets scale better than others. There are a number of different axes on which investment may scale - by the level of fidelity provided by the system, or by the number of assets which may be damaged. In an environment where a variety of assets may have a wide variety of different types of damage inflicted, attempting to realistically render the results of these damage events results in a combinatorial explosion that quickly becomes unmanagable both in terms of processing it in real time and when attempting to supply the assets that support rendering damaged structures.
+
+	A numebr of approaches have been take in order to attempt to automate the process both of determining what sort of damage should be renered, and also procedurally generating the assets (meshes, textures, VFX) necessary in order to faithfully render this damage. To date, the majority of such procedural systems focus on a per-material or per-object approach that responds to a single kind of impact damage and merely varies the magnitude of the effect applied in order to respond to differences in damage kind --- i.e. the difference between a single stray bullt impact and a nearby high-yield explosive detonation.
+
+	Where larger scale destruction effects are necessary, these are typically handled by a combination of small-scale procedurally destructable elements, and custom designer-written scripts that make use of higher level knowledge about the physical structure of the object being destroyed and the `intent' of the destruction - whether it is simply intended to provide a visual effect, or will have some ludic ramifications on the palyers' abilities or accessible areas within the game.
+
+	Some genres of game --- notably space- or naval-combat sims, feature large physical structures that can be subject to [ideosyncratic] recognisable forms of destruction --- for example, hull deformation as a result of impact, or separation of smaller components such as conning towers. The types of damamge that each protion of such a ship may be suject to are dependant not only on the kind of damage applied, but also on the physical struture of the area affected and the supproting physical structures surrounding it. No existing procedural destruction systems apply knowledge about the structure of the affected object when generating possible damamge outcomes, and so in this document a review of related research is presented, and a promising avenue for further investigation is suggested.
+
+	\section{Document Overview}
+
+\chapter{Literature Review}
+	% Now you can go into more detail on what others have done. For each contribution explain if the work is relevant to your solution, you will use the method of ‘X’ for part of the project, or if you have a way of improving on ‘X’ explain that briefly too ( a longer explanation will come later when you have done the project).
+
+	\section{Exsiting Implementations}
+		INdestructible
+		scripted
+		in-game metric, no visual representation. Possible death animation
+		Art swap - various thresholds, identical each time. Fidelity scales with artist investment
+		Voxel-based approaches
+		Destructible materials
+		Scripted systems
+
+		Previous research on destruction of comparatively small objects \cite{van2011procedural}.
+	\section{Declarative Solvers}
+		LOG_Ideah
+		Truth maintenance systems
+\chapter{Proposed Approach}
+	% You will not at this stage have the details but give as many ideas as you can on what will be tried. Methodology: depends on what subject (need to discuss with supervisor), proposed data structures and algorithms should be mentioned here.
+	\section{The Problem of Scale}
+\chapter{Evaluation}
+	% How to evaluate your approach. Many HCI proposals will involve experimentation, which should be mentioned here. For software projects performance may be an issue and/or testing of functionality. How you will compare your approach to other methods can be described in this section.
+\chapter{Timeline}
+	% Provide a proposed timeline for the project (best and worst case scenarios).
+	Due to the commercial nature of the project is is likely that a completed version of the system will be needed within the next year and a half
+	explain the early access system
+	incremental development
+	start with minimal working system within six months
+	develop further guided by feedback
+	after system completion, forther support/development may be necessary
+
+\chapter{Conclusion}
+	% What you will have discovered by the end of the project.
+	is ASP viable in realtime for solving the combinatorial explosion problem
+	can we render asp solutions in a convincing manner
+	is the system design sufficiently environment-agnostic
+
+
+\bibliographystyle{eg-alpha-doi}
+
+\bibliography{baththesis}
+
+
+\end{document}
+
+% 1. Specification
+% The coursework consists of an approx. 8000 word research project proposal, including a literature review. The proposal must contain a description of the project to be carried out, including:
+% • The project's primary and secondary goals
+% • The approach to be used, including an approximate timeline
+% • An initial proposal for a suitable methodology for assessing whether each of the project's goals has been accomplished
+% • The motivation for the project
+% • The background of the project, including any related work, whether in the form of research or applications
+% • • A comprehensive literature review which supports all of the above The exact structure of the document depends on the concrete type of project, but it must include a 3-5 page Introduction section which:
+% • Summarises the expected main argument of the dissertation,
+% • Presents a clear roadmap for the rest of the document, and
+% * Provides a proposed timeline for the project (including best & worse case scenarios)
+% 2. Assessment
+% The coursework will be conducted individually. Attention is drawn to the University rules on plagiarism in the Student Handbook.
+% The coursework is worth 90% of the marks of the course. The remaining 10% is for active participation in the course and presentation.
+% The average amount of time the student is intended to spend on the coursework is 120 hours.
+% The assessment will be carried out by the Unit Lecturer together with the supervisor of the respective research project.
+% Key issues for marking will be:
+% • Is there a clear thesis argument for the proposal?
+% • Is there a clear proposal for research that will contribute to the argument?
+% • Has the author taken into account the possibility of multiple outcomes?
+% • Does the Introduction give a good guide to the rest of the document?
+% • Is the Bibliography properly referenced and formatted?
+% • Does the project described in the proposal reflect the discussions you have had with its author?
+% • Is the literature review appropriate and adequate for the project? Are references current, relevant and from acceptable sources?
+% • Is the length of the proposal appropriate, and is all the content relevant?
