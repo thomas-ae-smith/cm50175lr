@@ -12,8 +12,9 @@
 
 \maketitle
 
-\begin{abstract} %32
-	In this proposal and literature review a number of possible approaches to developing a procedural destruction system are investigated, and an approach developed to guide practical research and development in this area.
+\begin{abstract} %68
+	Although a range of real-time procedural destruction systems of varied sophistication already exist, they typically do not account for the larger-scale structure of the assets being damaged, and there is little research in this area.
+	In this proposal and literature review a number of possible approaches to developing a structure-aware procedural destruction system are investigated, and an approach developed to guide practical research and development in this area.
 \end{abstract}
 
 
@@ -33,37 +34,44 @@
 	% The exact structure of the document depends on the concrete type of project, but it must include a 3-5 page Introduction section which:
 % • Summarises the expected main argument of the dissertation,
 % • Presents a clear roadmap for the rest of the document, and
-	Paragraph on video games introducing context and the drive for increased fidelity, enabled by ever-improving hardware. Also mention variety.
-
-	Providing high-fidelity destruction requires investment. Some approaches to rendering damage applied to in-game assets scale better than others. There are a number of different axes on which investment may scale - by the level of fidelity provided by the system, or by the number of assets which may be damaged. In an environment where a variety of assets may have a wide variety of different types of damage inflicted, attempting to realistically render the results of these damage events results in a combinatorial explosion that quickly becomes unmanageable both in terms of processing it in real time and when attempting to supply the assets that support rendering damaged structures.
-
+	\section{Procedural Destruction}
+	\section{Development Context}
+	\section{Related Research}
 	A number of approaches have been take in order to attempt to automate the process both of determining what sort of damage should be rendered, and also procedurally generating the assets (meshes, textures, VFX) necessary in order to faithfully render this damage. To date, the majority of such procedural systems focus on a per-material or per-object approach that responds to a single kind of impact damage and merely varies the magnitude of the effect applied in order to respond to differences in damage kind --- i.e. the difference between a single stray bullet impact and a nearby high-yield explosive detonation.
 
 	Where larger scale destruction effects are necessary, these are typically handled by a combination of small-scale procedurally destructible elements, and custom designer-written scripts that make use of higher level knowledge about the physical structure of the object being destroyed and the `intent' of the destruction - whether it is simply intended to provide a visual effect, or will have some ludic ramifications on the players' abilities or accessible areas within the game.
+
+	\section{The Problem of Scale}
+	Providing high-fidelity destruction requires investment. Some approaches to rendering damage applied to in-game assets scale better than others. There are a number of different axes on which investment may scale - by the level of fidelity provided by the system, or by the number of assets which may be damaged. In an environment where a variety of assets may have a wide variety of different types of damage inflicted, attempting to realistically render the results of these damage events results in a combinatorial explosion that quickly becomes unmanageable both in terms of processing it in real time and when attempting to supply the assets that support rendering damaged structures.
+	
+	\section{Constraint-based Solvers}
+	Paragraph on video games introducing context and the drive for increased fidelity, enabled by ever-improving hardware. Also mention variety.
+
+
 
 	Some genres of game --- notably space- or naval-combat sims, feature large physical structures that can be subject to [idiosyncratic] recognisable forms of destruction --- for example, hull deformation as a result of impact, or separation of smaller components such as conning towers. The types of damage that each portion of such a ship may be subject to are dependant not only on the kind of damage applied, but also on the physical structure of the area affected and the supporting physical structures surrounding it. No existing procedural destruction systems apply knowledge about the structure of the affected object when generating possible damage outcomes, and so in this document a review of related research is presented, and a promising avenue for further investigation is suggested.
 
 	\section{Implementation Constraints}
 		Loose coupling
-		Processor time --- must run in real-time in a fraction of a frame, or calculations may be amortised across mutlitple frames. It is improtatnt to ensutre that the system ramains responsive, whilst also not interfereing with the mutitude of other processing requirements imposed by the game.
+		Processor time --- must run in real-time in a fraction of a frame, or calculations may be amortised across multiple frames. It is important to ensure that the system remains responsive, whilst also not interfering with the multitude of other processing requirements imposed by the game.
 		As the renderings are likely to provide tactically-useful information to players during runtime, it is important to ensure that the appearance of damage is consistent across each clients' rendering. This is particularly challenging given the constrained network resources --- it will be essential to minimise the amount of additional data sent over the network merely to ensure client synchronisation.
 
 	\section{Document Overview}
 
 \chapter{Literature Review}
 	% Now you can go into more detail on what others have done. For each contribution explain if the work is relevant to your solution, you will use the method of ‘X’ for part of the project, or if you have a way of improving on ‘X’ explain that briefly too ( a longer explanation will come later when you have done the project).
-	In order to inform the defevelopment of the project, it is worth considering reserach in related areas. First, a rance of exisitng appropached to procediural destruction systems withing commercial games are considered --- accompanied by academic overviews of particular techniques wehre available. Then, the concept of declarative solvers is introduced, with particular reference to existing projects and aproaches that might provide promising initial directions. Finally, there is a brief overview of some of the other techniques that may be necessary in order to bind the abstract output of a solver system to a concreted visual representation within a game.
+	In order to inform the development of the project, it is worth considering research in related areas. First, a range of existing approaches to procedural destruction systems within commercial games are considered --- accompanied by academic overviews of particular techniques where available. Then, the concept of declarative solvers is introduced, with particular reference to existing projects and approaches that might provide promising initial directions. Finally, there is a brief overview of some of the other techniques that may be necessary in order to bind the abstract output of a solver system to a concreted visual representation within a game.
 
 	\section{Existing Implementations}
 		Any particular procedural destruction system is distinguished by the implementation chosen for two primary considerations: the [decision-making] approach, and the rendering solution. The [something] is often defined by the ludic environment of the system --- design decisions will be made at the gameplay level about the particular model of damage most suited to the desired in-game experience. A suitable way of communicating this information to a player via visual (rarely, audible) representation can then be developed.
 
-		In order to provide context for the description of the proposed system, it is instructive to investigate the range of methods that have previously been used to model and represent damage and destruction within games to date. A number of the approaches described below are mutully incompatible, however there are a small number of subsets that are often used in combination with each other, and which may indicate useful techniques that could be applicable in the present domain. The sections below are arranged roughly in order of increasing implementation complexity, and therefore also chronologically in order of representation fidelity.
+		In order to provide context for the description of the proposed system, it is instructive to investigate the range of methods that have previously been used to model and represent damage and destruction within games to date. A number of the approaches described below are mutually incompatible, however there are a small number of subsets that are often used in combination with each other, and which may indicate useful techniques that could be applicable in the present domain. The sections below are arranged roughly in order of increasing implementation complexity, and therefore also chronologically in order of representation fidelity.
 
 		\subsection{No Destruction}
 			In early and/or simple games, it is commonly the case that all game objects are simply indestructible, which requires no in-game damage metric or alternative visual rendering.
 
 		\subsection{Scripted Destruction}
-			The simplest possible form or destruction is simple presence/absence of an object in response to a particular in-game event --- typically collision with a projectile fired by the player. More advanced implementations may replace the object with a visual effect such as an explosion.
+			The simplest possible form of destruction is simple presence/absence of an object in response to a particular in-game event --- typically collision with a projectile fired by the player. More advanced implementations may replace the object with a visual effect such as an explosion.
 
 		\subsection{Triggered Destruction}
 			The overall `health' or `structural integrity' of an 
@@ -76,7 +84,7 @@
 
 		Previous research on destruction of comparatively small objects \cite{van2011procedural}.
 	\section{Declarative Solvers}
-		LOG-Ideah \cite{novelli2012log}
+		LOG-IDEAH \cite{novelli2012log}
 		Truth maintenance systems
 
 	\section{Relevant Rendering Techniques}
@@ -85,7 +93,11 @@
 		Mesh deformation
 		Mesh subdivision
 
-		One possible approach to redering deforemd structures is described by Morris et. al. in \cite{morris2012modular}, however sinve all output is determined at runtime via GPU shaders, it would be difficult to ensure cross-client synchronisation of damage appearance
+		One possible approach to rendering deformed structures is described by Morris et. al. in \cite{morris2012modular}, however since all output is determined at runtime via GPU shaders, it would be difficult to ensure cross-client synchronisation of damage appearance
+
+		\cite{stegmayr2008procedural} describes a physically-based method that reportedly provides interactive framerates, however this is unlikely to be fast enough given the relatively small processor slice available during each frame. It may however be worth investigating with a view to constructing a library of pre-computed deformations for each mesh, if it becomes apparent that an optimisation of this nature would prove beneficial.
+
+		procedural architecture using deformation-aware split grammars \cite{zmugg2013procedural}
 
 \chapter{Proposed Approach}
 	% You will not at this stage have the details but give as many ideas as you can on what will be tried. Methodology: depends on what subject (need to discuss with supervisor), proposed data structures and algorithms should be mentioned here.
