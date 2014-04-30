@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  29 APR 2014 17:12
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 APR 2014 10:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -171,38 +171,44 @@ Chapter 1.
 Chapter 2.
 [4
 
-] [5]
+] [5] [6]
 Chapter 3.
-[6
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 96.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 96.
+ [7
 
-]
+] [8]
 Chapter 4.
-LaTeX Font Info:    Try loading font information for U+msa on input line 94.
+LaTeX Font Info:    Try loading font information for U+msa on input line 123.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 94.
+LaTeX Font Info:    Try loading font information for U+msb on input line 123.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [7
+) [9
 
-] [8]
+] [10]
 Chapter 5.
-[9
+[11
 
 ]
 Chapter 6.
-(./baththesis.bbl [10
+(./baththesis.bbl [12
 
-]) [11
+]) [13
 
 ] (./baththesis.aux) ) 
 Here is how much of TeX's memory you used:
- 1828 strings out of 493633
- 25375 string characters out of 3143378
- 78207 words of memory out of 3000000
- 5110 multiletter control sequences out of 15000+200000
+ 1850 strings out of 493633
+ 25775 string characters out of 3143378
+ 78243 words of memory out of 3000000
+ 5129 multiletter control sequences out of 15000+200000
  11665 words of font info for 43 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  37i,4n,24p,812b,158s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -213,12 +219,13 @@ onts/cm/cmcsc10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmr12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr17.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti10.pfb>
-Output written on baththesis.pdf (12 pages, 114459 bytes).
+m/cmsy10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mti10.pfb>
+Output written on baththesis.pdf (14 pages, 134999 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

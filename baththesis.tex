@@ -43,6 +43,11 @@
 
 	Some genres of game --- notably space- or naval-combat sims, feature large physical structures that can be subject to [idiosyncratic] recognisable forms of destruction --- for example, hull deformation as a result of impact, or separation of smaller components such as conning towers. The types of damage that each portion of such a ship may be subject to are dependant not only on the kind of damage applied, but also on the physical structure of the area affected and the supporting physical structures surrounding it. No existing procedural destruction systems apply knowledge about the structure of the affected object when generating possible damage outcomes, and so in this document a review of related research is presented, and a promising avenue for further investigation is suggested.
 
+	\section{Implementation Constraints}
+		Loose coupling
+		Processor time --- must run in real-time in a fraction of a frame, or calculations may be amortised across mutlitple frames. It is improtatnt to ensutre that the system ramains responsive, whilst also not interfereing with the mutitude of other processing requirements imposed by the game.
+		As the renderings are likely to provide tactically-useful information to players during runtime, it is important to ensure that the appearance of damage is consistent across each clients' rendering. This is particularly challenging given the constrained network resources --- it will be essential to minimise the amount of additional data sent over the network merely to ensure client synchronisation.
+
 	\section{Document Overview}
 
 \chapter{Literature Review}
@@ -71,33 +76,59 @@
 
 		Previous research on destruction of comparatively small objects \cite{van2011procedural}.
 	\section{Declarative Solvers}
-		LOG-Ideah
+		LOG-Ideah \cite{novelli2012log}
 		Truth maintenance systems
 
 	\section{Relevant Rendering Techniques}
+		Decal application
+		Procedural placement of VFX
+		Mesh deformation
+		Mesh subdivision
+
+		One possible approach to redering deforemd structures is described by Morris et. al. in \cite{morris2012modular}, however sinve all output is determined at runtime via GPU shaders, it would be difficult to ensure cross-client synchronisation of damage appearance
+
 \chapter{Proposed Approach}
 	% You will not at this stage have the details but give as many ideas as you can on what will be tried. Methodology: depends on what subject (need to discuss with supervisor), proposed data structures and algorithms should be mentioned here.
 	Paragraph on overview of approach, to provide context for
 	\section{Research goals}
-	Working System, to demonstrate:
-		ASP liveness
-		Reification
-		Loose Coupling
+	As an essential part of the [] it will be necessary to develop and implement a working procedural destruction system, in order to demonstrate the feasibility of the following claims.
+	\begin{itemize}
+		\item Loose Coupling
+		\item ASP liveness
+		\item Reification
+	\end{itemize}
+
+	\section{Tool Integration}
+		Allow for artists and designers to annotate in-game assets --- provide meta-data detailing structural information such as hollow hulls or potentially weak connections. As a possible extension it may be feasible to analytically determine these features from mesh information alone, without requiring user interaction, or as part of a mixed-initiative interface that allows developers to curate aesthetically suitable solutions \cite{yannakakis2014mixed}.
+
+		Require integration with existing Xed pipeline for custom Xii engine - fortunately this makes importing metadata into the game trivial.
+
+		Loose coupling \cite{lee2013decoupling}
+	\section{Solver System}
+
+	\section{Damage Rendering}
 
 	\section{The Problem of Scale}
 		Show off how much better this approach is ^^
 
 \chapter{Evaluation}
 	% How to evaluate your approach. Many HCI proposals will involve experimentation, which should be mentioned here. For software projects performance may be an issue and/or testing of functionality. How you will compare your approach to other methods can be described in this section.
+	Paragraph on the importance of evaluation
+
+	\section{Expressive Range and Fidelity}
+		\cite{smith2010analyzing} analysing the expressive range of a level generator
+
 	\section{Performance}
 		integration with a real-time game means that the timely performance of the system is as serious concern. It may become appropriate to perform compile time optimisations, pre-calculation and pre-caching of possible solutions in order to ensure that during a match the system is able to provide appropriate damage solutions in real time. 
 		Writing in 2008, Boenn et. al. \cite{boenn2008automatic} suggest that while some of the faster ASP solvers at the time were responsive enough to provide an interactive experience while generating melodies, they did not at the time provide real-time performance. There appears to be no more contemporary research that indicates significant recent speed increases, and so this is likely to remain an active research area for the project.
+
 		Evaluation of the performance of the system within the runtime context of the game environment is most likely to be performed via frame-rate comparisons throughout development. As the project should maintain a loose coupling with the game itself, it should remain relatively easy to selectively disable it for the purpose of comparison tests across similar in-game scenarios. A range of game events may be investigated both with and without the procedural destruction system enabled, and then logs of in-game metrics including frame-rate may be analysing in order to determine the impact of the processing load required by the implemented solution.
 
 	\section{User Acceptance Testing - Developers}
 
 	\section{User Acceptance Testing - Players}
 		As the game that the system will initially be developed within is being released on an Early Access platform, it will be possible to perform A/B testing and receive user feedback on varied incarnations of the system during development. This may range from informal feedback via community channels to focused user surveys designed to elicit specific impressions of all aspects of the game --- including the procedural destruction system. In particular, it would be useful to evaluate the impact of the system on user enjoyment and effectiveness, specifically possible increased satisfaction when applying damage to `enemy' ships and structures, and increased passive awareness of the status of their own and other visible ships for tactical decision purposes.
+
 \chapter{Timeline}
 	% Provide a proposed timeline for the project (best and worst case scenarios).
 	Due to the commercial nature of the project is is likely that a completed version of the system will be needed within the next year and a half
